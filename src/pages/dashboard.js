@@ -6,6 +6,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 export default function Dashboard() {
   const { isLoggedIn, logout } = useAuth();
   const router = useRouter();
+  
 
   useEffect(() => {
     if (!isLoggedIn) {

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
 import { useEffect, useState } from 'react';
+import LoginButton from '@/components/LoginButton';
 
 export default function Login() {
   const router = useRouter();
@@ -35,6 +36,7 @@ export default function Login() {
   return (
     <div className="max-w-md mx-auto mt-20 p-6 border rounded-xl shadow">
       <h1 className="text-2xl font-bold mb-4">Log In</h1>
+      <LoginButton />
       <form onSubmit={handleLogin}>
         <input
           type="email"
