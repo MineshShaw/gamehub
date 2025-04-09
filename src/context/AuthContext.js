@@ -4,18 +4,16 @@ import { supabase } from '@/lib/supabaseClient';
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(null);         // for email/password
-  const [user, setUser] = useState(null);           // for Google login
+  const [token, setToken] = useState(null);         
+  const [user, setUser] = useState(null);           
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Load email/password token from localStorage
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
       setToken(storedToken);
     }
 
-    // Load Supabase session
     const getSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user) {
@@ -35,14 +33,12 @@ export function AuthProvider({ children }) {
     };
   }, []);
 
-  // Your existing email/password login method (manual)
   const loginWithEmailPassword = async (jwtToken) => {
     localStorage.setItem('token', jwtToken);
     setToken(jwtToken);
   };
 
   const logout = async () => {
-    // clear both local token and supabase session
     localStorage.removeItem('token');
     setToken(null);
 
@@ -51,13 +47,14 @@ export function AuthProvider({ children }) {
   };
 
   const loginWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
         redirectTo: `${window.location.origin}/auth/callback`,
       },
-    });
-  };
+    })
+    if (error) console.error('Login error:', error.message)
+  }
 
   const isLoggedIn = !!token || !!user;
 
@@ -79,3 +76,4 @@ export function AuthProvider({ children }) {
 }
 
 export const useAuth = () => useContext(AuthContext);
+  

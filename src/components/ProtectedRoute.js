@@ -8,11 +8,11 @@ export default function ProtectedRoute({ children }) {
 
   useEffect(() => {
     if (!loading && !isLoggedIn) {
-      router.push('/auth/login'); // Redirect if not logged in
+      router.push('/auth/signin'); 
     }
   }, [isLoggedIn, loading]);
 
-  if (loading || !isLoggedIn) return null; // Optional: show loader here
+  if (loading || !isLoggedIn) return null; 
 
   return children;
 }

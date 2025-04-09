@@ -12,14 +12,14 @@ export default function LandingPage() {
     }
   }, [isLoggedIn, loading]);
 
-  if (loading) return null; // ⏳ Wait until auth loads
-  if (isLoggedIn) return null; // Already redirected
+  if (loading) return null; 
+  if (isLoggedIn) return null; 
 
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-4">Welcome to GameHub!</h1>
-      <button onClick={() => router.push('/auth/login')} className="btn">Login</button>
-      <button onClick={() => router.push('/auth/signup')} className="btn ml-2">Sign Up</button>
+      <button onClick={() => router.push('/auth/signin')} className="btn">Login</button>
+      <button onClick={() => router.push('/auth/signin')} className="btn ml-2">Sign Up</button>
     </div>
   );
 }

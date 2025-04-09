@@ -28,8 +28,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 border rounded-xl shadow">
-      <h1 className="text-2xl font-bold mb-4">Sign Up</h1>
+    <div className="max-w-md mx-auto mt-2 p-6 border rounded-xl shadow gap-5 flex flex-col">
       <LoginButton />
       <form onSubmit={handleSignup}>
         <input
@@ -50,7 +49,7 @@ export default function Signup() {
         />
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-200 ease-in-out"
         >
           Sign Up
         </button>

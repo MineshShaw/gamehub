@@ -10,11 +10,11 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      router.push("/auth/login");
+      router.push("/auth/signin");
     }
   }, [isLoggedIn]);
 
-  if (!isLoggedIn) return null; // avoid flicker
+  if (!isLoggedIn) return null; 
 
   return (
     <ProtectedRoute>

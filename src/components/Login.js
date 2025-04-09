@@ -5,7 +5,7 @@ import LoginButton from '@/components/LoginButton';
 
 export default function Login() {
   const router = useRouter();
-  const { login, isLoggedIn } = useAuth();
+  const { loginWithEmailPassword, isLoggedIn } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -27,15 +27,16 @@ export default function Login() {
     });
     const data = await res.json();
     if (res.ok) {
-      login(data.token); // this triggers the useEffect above
+      loginWithEmailPassword(data.token);
+    } else {
+      setError(data.error || 'Login failed');
     }
   };
 
   
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 border rounded-xl shadow">
-      <h1 className="text-2xl font-bold mb-4">Log In</h1>
+    <div className="max-w-md mx-auto mt-2 p-6 border rounded-xl shadow gap-5 flex flex-col">
       <LoginButton />
       <form onSubmit={handleLogin}>
         <input
@@ -56,7 +57,7 @@ export default function Login() {
         />
         <button
           type="submit"
-          className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700"
+          className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700 transition duration-200 ease-in-out"
         >
           Log In
         </button>

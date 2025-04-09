@@ -1,19 +1,12 @@
 'use client'
-import { supabase } from '@/lib/supabaseClient'
+import { useAuth } from "@/context/AuthContext"
 
 export default function LoginButton() {
-  const loginWithGoogle = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    })
-    if (error) console.error('Login error:', error.message)
-  }
+  const { loginWithGoogle } = useAuth()
 
   return (
-    <button onClick={loginWithGoogle} className="bg-blue-600 text-white px-4 py-2 rounded">
+    <button onClick={loginWithGoogle} className="bg-blue-600 text-white px-4 py-2 rounded flex gap-4 justify-center items-center hover:bg-blue-700 transition duration-200 ease-in-out">
+      <img className="w-6 h-6 rounded-full" src="https://icon2.cleanpng.com/20240216/yhs/transparent-google-logo-google-logo-with-colorful-letters-on-black-1710875297222.webp"></img>
       Sign in with Google
     </button>
   )
