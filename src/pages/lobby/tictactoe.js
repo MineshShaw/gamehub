@@ -4,6 +4,16 @@ import io from "socket.io-client";
 
 let socket;
 
+/**
+ * A Next.js page component that renders a simple lobby for a Tic Tac Toe game.
+ *
+ * It renders a form with an input for the user to enter their name and a button
+ * to search for a game. When the button is clicked, it emits a "search_game"
+ * event to the server with the user's name, and waits for the server to emit a
+ * "match_found" event back. When the "match_found" event is received, it
+ * redirects the user to the Tic Tac Toe game page with the match details as
+ * query parameters.
+ */
 export default function TicTacToeLobby() {
   const [name, setName] = useState("");
   const [searching, setSearching] = useState(false);

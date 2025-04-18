@@ -20,6 +20,14 @@ const games = [
   },
 ];
 
+/**
+ * The main dashboard page for the app.
+ *
+ * This page displays a list of games to play, each with an image and a name.
+ * When a game is clicked, the user is redirected to the game's lobby page.
+ *
+ * @returns {JSX.Element} The dashboard page.
+ */
 export default function Dashboard() {
   return (
     <ProtectedRoute>

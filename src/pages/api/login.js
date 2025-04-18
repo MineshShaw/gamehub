@@ -4,6 +4,14 @@ import { supabase } from '@/lib/supabaseClient';
 
 const JWT_SECRET = process.env.NEXT_PUBLIC_JWT_SECRET;
 
+/**
+ * Handles POST requests to /api/login
+ *
+ * Authenticates a user by verifying email and password.
+ * Returns a JSON response with a JWT token if the authentication is successful.
+ * If the authentication fails, returns a 400 status code with an error message.
+ * If the request method is not POST, returns a 405 status code.
+ */
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
 

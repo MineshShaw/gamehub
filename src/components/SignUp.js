@@ -2,6 +2,14 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import LoginButton from '@/components/LoginButton';
 
+/**
+ * Signup component that provides a form for user registration.
+ * Utilizes email and password input fields to sign up users.
+ * Redirects successful signups to the login page.
+ * Displays error messages if signup fails.
+ * Includes a button for Google login.
+ */
+
 export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

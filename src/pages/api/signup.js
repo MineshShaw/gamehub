@@ -1,6 +1,19 @@
 import bcrypt from 'bcrypt';
 import { supabase } from '@/lib/supabaseClient';
 
+/**
+ * Handles POST requests to /api/signup
+ *
+ * Registers a new user by storing their email and hashed password in the database.
+ * If the user already exists, returns a 400 status code with an error message.
+ * If the signup fails due to any other error, returns a 500 status code with an error message.
+ * If the signup is successful, returns a 200 status code with a success message.
+ * If the request method is not POST, returns a 405 status code.
+ *
+ * @param {object} req - The HTTP request object containing the user's email and password.
+ * @param {object} res - The HTTP response object used to send back the appropriate response.
+ */
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
 

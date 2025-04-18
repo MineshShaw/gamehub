@@ -1,3 +1,11 @@
+// It imports necessary modules and sets up an Express.js app.
+// It creates an HTTP server and attaches the Express.js app to it.
+// It sets up a Socket.IO server to handle real-time communication with clients.
+// It serves static files from the 'public' directory and sets the root route to serve 'index.html'.
+// When a client connects, it logs a message and sets up event listeners for:
+// 'search_game': matches the client with another player for a game of the specified type (currently only Tic Tac Toe).
+// 'disconnect': logs a message and removes the client from the game queue.
+// It starts the server and listens on port 3000.
 const express = require('express');
 const path = require('path');
 const http = require('http');

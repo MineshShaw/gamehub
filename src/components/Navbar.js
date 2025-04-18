@@ -4,6 +4,15 @@ import Link from "next/link";
 import { UserAvatar } from "./UserAvatar";
 import { useAuth } from "@/context/AuthContext";
 
+/**
+ * The navbar component.
+ *
+ * This component renders a responsive navbar with links to the most important
+ * pages of the application. It also displays a user avatar and a logout button
+ * if the user is logged in.
+ *
+ * @returns {React.ReactElement} The navbar component.
+ */
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isLoggedIn, logout, user } = useAuth();

@@ -1,6 +1,11 @@
 'use client'
 import { useAuth } from "@/context/AuthContext"
 
+/**
+ * A button that signs in the user with Google, using the `useAuth()` hook.
+ *
+ * @returns A button element with a Google logo and the text "Sign in with Google".
+ */
 export default function LoginButton() {
   const { loginWithGoogle } = useAuth()
 

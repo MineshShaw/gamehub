@@ -3,6 +3,14 @@ import { useAuth } from '@/context/AuthContext';
 import { useEffect, useState } from 'react';
 import LoginButton from '@/components/LoginButton';
 
+/**
+ * Login component that provides a form for user authentication.
+ * Utilizes email and password input fields to log in users.
+ * Redirects authenticated users to the dashboard.
+ * Displays error messages if login fails.
+ * Also includes a button for Google login.
+ */
+
 export default function Login() {
   const router = useRouter();
   const { loginWithEmailPassword, isLoggedIn } = useAuth();

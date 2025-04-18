@@ -12,6 +12,17 @@ import {
   } from "@/components/ui/dropdown-menu"
 import { Router } from "next/router"
   
+/**
+ * A dropdown menu that shows the user's avatar and lets them navigate to their
+ * profile or log out.
+ *
+ * @param {{ name: string, imageUrl: string, onLogout: () => void }} props
+ * @prop {string} name - The user's name, which will be used to generate an
+ *     abbreviation if no image is provided. Defaults to "User".
+ * @prop {string} imageUrl - The URL of the user's avatar image. Defaults to an
+ *     empty string.
+ * @prop {() => void} onLogout - A function to call when the user logs out.
+ */
   export function UserAvatar({ name = "User", imageUrl = "", onLogout }) {
     const getInitials = (fullName) => {
       return fullName

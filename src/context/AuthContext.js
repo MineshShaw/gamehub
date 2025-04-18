@@ -3,6 +3,24 @@ import { supabase } from '@/lib/supabaseClient';
 
 const AuthContext = createContext();
 
+/**
+ * Provides the authentication state and functions to manage it to the
+ * application.
+ * 
+ * The state is:
+ * - `token`: The authentication token, stored in local storage.
+ * - `user`: The user object, set when the user is logged in.
+ * - `loading`: A boolean indicating if the component is in a loading state.
+ * - `isLoggedIn`: A boolean indicating if the user is logged in.
+ * 
+ * The functions are:
+ * - `loginWithEmailPassword(jwtToken)`: Logs the user in with a JWT token.
+ * - `loginWithGoogle()`: Logs the user in with Google.
+ * - `logout()`: Logs the user out.
+ * 
+ * @param {{children: ReactNode}} props The component props.
+ * @returns {JSX.Element} The context provider component.
+ */
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(null);         
   const [user, setUser] = useState(null);           

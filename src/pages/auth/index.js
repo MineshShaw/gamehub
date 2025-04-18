@@ -2,6 +2,16 @@ import Login from "@/components/Login";
 import Signup from "@/components/SignUp";
 import { useState } from "react";
 
+/**
+ * A component that renders a sign in page with a tabbed interface.
+ *
+ * The page is divided into two main sections: the tabs and the content.
+ * The tabs are displayed as two buttons side-by-side, and the content
+ * is either the Login component or the Signup component, depending on
+ * which tab is currently selected.
+ *
+ * @returns A JSX element representing the Signin page.
+ */
 const Signin = () => {
   const [tab, changeTab] = useState("login");
 

@@ -4,6 +4,20 @@ import io from "socket.io-client";
 
 let socket;
 
+/**
+ * Renders the Tic Tac Toe game interface, managing the game state and
+ * handling user interactions. Connects to a Socket.IO server to facilitate
+ * real-time multiplayer gameplay.
+ * 
+ * The component manages the game board state, the current player's turn,
+ * game status, and the winner. It listens for server events to update the
+ * board, detect game over conditions, and manage player turns.
+ * 
+ * The game supports restarting, allowing players to start a new game after
+ * a win or draw. The component also manages socket connections, joining the
+ * appropriate game room and requesting the current board state.
+ */
+
 export default function TicTacToeGame() {
   const router = useRouter();
   const { roomId, opponent, mark, name } = router.query;

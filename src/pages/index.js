@@ -2,6 +2,16 @@ import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
+/**
+ * The landing page of the application.
+ *
+ * If the user is not logged in, renders a simple page with a login button and a
+ * sign up button.
+ *
+ * If the user is logged in, redirects to the dashboard.
+ *
+ * @returns {JSX.Element} The landing page component.
+ */
 export default function LandingPage() {
   const { isLoggedIn, loading } = useAuth();
   const router = useRouter();

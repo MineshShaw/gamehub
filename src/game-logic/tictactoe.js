@@ -1,6 +1,11 @@
 const queue = [];
 const gameBoards = {};
 
+/**
+ * Matchmakes two players in the queue for a game of Tic Tac Toe
+ * @param {Socket} socket The socket of the player to matchmake
+ * @param {SocketIO.Server} io The Socket.IO server
+ */
 function matchmake(socket, io) {
   queue.push(socket);
   console.log(`${socket.playerName} is searching for Tic Tac Toe...`);
@@ -29,6 +34,16 @@ function matchmake(socket, io) {
   }
 }
 
+/**
+ * Sets up a socket to listen for join_room and make_move events
+ * and respond accordingly. The join_room event makes the socket
+ * join a room with the given id. The make_move event makes a move
+ * at the given index in the given room and checks for a winner.
+ * If there is a winner, it broadcasts the winner to the room
+ * and resets the game board.
+ * @param {SocketIO.Server} io The Socket.IO server
+ * @param {Socket} socket The socket to set up
+ */
 function setup(io, socket) {
   socket.on('join_room', (roomId) => {
     socket.join(roomId);
@@ -36,27 +51,29 @@ function setup(io, socket) {
   });
 
   socket.on('make_move', ({ roomId, index, mark }) => {
-    // Update board and check win condition
     const winner = checkWinner(roomId, index, mark);
-    
-    // First, broadcast the move to everyone including the winner announcement
     io.to(roomId).emit('move_made', { index, mark });
     
     if (winner) {
-      // Then send the game over event after a slight delay to ensure the move is processed
       setTimeout(() => {
         io.to(roomId).emit('game_over', { winner, index, mark });
       }, 100); 
-      resetGame(roomId);  // Reset game for new round
+      resetGame(roomId);
     }
   });
-
-  // Add the get_board_state handler inside setup
   socket.on('get_board_state', (roomId) => {
     socket.emit('board_state', getBoard(roomId));
   });
 }
 
+/**
+ * Checks if there is a winner in the given Tic Tac Toe game.
+ * @param {string} roomId The room ID of the game
+ * @param {number} index The index of the most recent move
+ * @param {string} mark The mark of the player who made the move
+ * @returns {string|null} The mark of the winner if there is one,
+ *   'draw' if the board is full, or null if the game is not over
+ */
 function checkWinner(roomId, index, mark) {
   if (!gameBoards[roomId]) {
     gameBoards[roomId] = Array(9).fill(null);
@@ -66,19 +83,16 @@ function checkWinner(roomId, index, mark) {
   const board = gameBoards[roomId];
 
   const winningCombinations = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8],  // Rows
-    [0, 3, 6], [1, 4, 7], [2, 5, 8],  // Columns
-    [0, 4, 8], [2, 4, 6],              // Diagonals
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+    [0, 4, 8], [2, 4, 6],             
   ];
 
-  // Check if any combination is a winning combination
   for (let combo of winningCombinations) {
     if (combo.every(i => board[i] === mark)) {
-      return mark; // Return winner's mark
+      return mark;
     }
   }
-
-  // Check if board is full (draw)
   if (board.every(cell => cell !== null)) {
     return 'draw';
   }
@@ -86,6 +100,12 @@ function checkWinner(roomId, index, mark) {
   return null;
 }
 
+/**
+ * Gets the game board for the given room ID. If the board does not
+ * exist, it creates a new one and returns it.
+ * @param {string} roomId The room ID of the game
+ * @returns {Array.<null|string>} The game board as a 9-element array
+ */
 function getBoard(roomId) {
   if (!gameBoards[roomId]) {
     gameBoards[roomId] = Array(9).fill(null);
@@ -93,11 +113,19 @@ function getBoard(roomId) {
   return gameBoards[roomId];
 }
 
+/**
+ * Resets the game board for the given room ID to its initial state.
+ * @param {string} roomId The room ID of the game
+ */
 function resetGame(roomId) {
   // Reset the game board (for next match)
   gameBoards[roomId] = Array(9).fill(null);
 }
 
+/**
+ * Removes the given socket from the queue.
+ * @param {Socket} socket The socket to remove from the queue
+ */
 function removeFromQueue(socket) {
   const index = queue.indexOf(socket);
   if (index !== -1) queue.splice(index, 1);
