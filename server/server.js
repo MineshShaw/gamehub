@@ -1,80 +1,57 @@
-const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 4000 });
+// /server.js
+const express = require('express');
+const path = require('path');
+const http = require('http');
+const { Server } = require('socket.io');
 
-let games = [];
+const ticTacToe = require('../src/game-logic/tictactoe');
+// const chess = require('../src/game-logic/chess'); // later
+// const checkers = require('../src/game-logic/checkers'); // later
 
-wss.on('connection', (ws) => {
-  console.log('New client connected');
+const app = express();
+const server = http.createServer(app);
 
-  // Send current games to the new client
-  ws.send(JSON.stringify({
-    type: 'games-list',
-    games,
-  }));
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:3001',
+    methods: ['GET', 'POST'],
+  },
+});
 
-  ws.on('message', (message) => {
-    const data = JSON.parse(message);
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
-    if (data.type === 'game-created') {
-      // Create a new game
-      const newGame = {
-        id: data.game.id,
-        name: data.game.name,
-        status: 'waiting',
-      };
+// Socket.IO
+io.on('connection', (socket) => {
+  console.log('a user connected');
 
-      // Save the game to the games list
-      games.push(newGame);
+  socket.on('search_game', ({ gameType, name }) => {
+    socket.playerName = name;
 
-      // Broadcast the game creation to all clients
-      wss.clients.forEach((client) => {
-        client.send(JSON.stringify({
-          type: 'game-created',
-          game: newGame,
-        }));
-      });
-    }
-
-    if (data.type === 'game-joined') {
-      // Find the game by ID
-      const game = games.find((game) => game.id === data.gameId);
-
-      if (game && game.status === 'waiting') {
-        // Change the status to 'in-progress' when someone joins
-        game.status = 'in-progress';
-
-        // Notify both players (game creator and the new player)
-        wss.clients.forEach((client) => {
-          client.send(JSON.stringify({
-            type: 'game-joined',
-            gameId: data.gameId,
-            status: 'in-progress',
-          }));
-        });
-      }
-    }
-
-    if (data.type === 'move-made') {
-      const game = games.find((game) => game.id === data.gameId);
-      if (game) {
-        // Update the board state (this is where you can add more complex move handling)
-        game.board = data.board;
-        game.turn = data.turn;
-
-        // Broadcast the move to both players
-        wss.clients.forEach((client) => {
-          client.send(JSON.stringify({
-            type: 'move-made',
-            gameId: data.gameId,
-            board: data.board,
-            turn: data.turn,
-          }));
-        });
-      }
+    switch (gameType) {
+      case 'tictactoe':
+        ticTacToe.matchmake(socket, io);
+        break;
+      // case 'chess': chess.matchmake(socket, io); break;
+      // case 'checkers': checkers.matchmake(socket, io); break;
+      default:
+        socket.emit('error_message', 'Unknown game type');
     }
   });
 
-  ws.on('close', () => {
-    console.log('Client disconnected');
+  ticTacToe.setup(io, socket);
+  // chess.setup(io, socket); // later
+  // checkers.setup(io, socket); // later
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+    ticTacToe.removeFromQueue(socket);
+    // chess.removeFromQueue(socket); // later
   });
+});
+
+server.listen(3000, () => {
+  console.log('Server listening on *:3000');
 });

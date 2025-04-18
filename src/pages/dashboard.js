@@ -10,7 +10,7 @@ const games = [
   { name: "Checkers", path: "./lobby/checkers", image: "/images/checkers.jpg" },
   {
     name: "Tic Tac Toe",
-    path: "./lobby/tic-tac-toe",
+    path: "./lobby/tictactoe",
     image: "/images/tictactoe.jpg",
   },
   {
@@ -26,7 +26,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      router.push("/auth/signin");
+      router.push("/auth");
     }
   }, [isLoggedIn]);
 

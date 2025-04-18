@@ -36,7 +36,7 @@ const Navbar = () => {
           {isLoggedIn ? (
             <UserAvatar onLogout={logout} name={user?.identities[0].identity_data.name || "User"} imageUrl={user?.identities[0].identity_data.avatar_url || ""}/>
           ) : (
-            <Link href="/auth/signin" className="text-cyan-400">
+            <Link href="/auth" className="text-cyan-400">
               Login
             </Link>
           )}
@@ -69,7 +69,7 @@ const Navbar = () => {
               <button className="text-left" onClick={logout}>Logout</button>
             </div>
           ) : (
-            <Link href="/auth/signin" className="text-cyan-400">
+            <Link href="/auth" className="text-cyan-400">
               Login
             </Link>
           )}
