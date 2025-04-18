@@ -8,7 +8,7 @@ export default function ProtectedRoute({ children }) {
 
   useEffect(() => {
     if (!loading && !isLoggedIn) {
-      router.push('/auth/signin'); 
+      router.push('/auth'); 
     }
   }, [isLoggedIn, loading]);
 

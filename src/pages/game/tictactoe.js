@@ -15,30 +15,21 @@ export default function TicTacToeGame() {
 
   useEffect(() => {
     if (!roomId) return;
-
-    // Connect to the WebSocket server
-    socket = io("http://localhost:3000"); // Ensure the correct port here
-
-    // Join the room
+    socket = io("http://localhost:3000");
     socket.emit("join_room", roomId);
-
     socket.on("board_state", (boardState) => {
       setBoard(boardState);
     });
 
     socket.emit("get_board_state", roomId);
-
-    // Listen for moves made by the opponent
     socket.on("move_made", ({ index, mark: incomingMark }) => {
       setBoard((prev) => {
         const newBoard = [...prev];
         newBoard[index] = incomingMark;
         return newBoard;
       });
-      setMyTurn(true); // It's now your turn again
+      setMyTurn(true);
     });
-
-    // Listen for game over event
     socket.on("game_over", ({ winner, index, mark: incomingMark }) => {
         setBoard((prev) => {
             const newBoard = [...prev];
@@ -49,13 +40,11 @@ export default function TicTacToeGame() {
         if (winner === "draw") {
           setGameStatus("It's a draw!");
         } else {
-          // Determine the winner's name based on the mark
           const winnerName = winner === mark ? name : opponent;
           setGameStatus(`${winnerName} wins!`);
         }
     });
-
-    // Cleanup on component unmount
+    
     return () => socket.disconnect();
   }, [roomId]);
 
@@ -67,7 +56,6 @@ export default function TicTacToeGame() {
     setBoard(newBoard);
     setMyTurn(false);
 
-    // Emit the move to the server
     socket.emit("make_move", {
       roomId,
       index,
@@ -91,7 +79,6 @@ export default function TicTacToeGame() {
     setMyTurn(mark === "X");
     setGameStatus("Waiting for opponent...");
 
-    // Restart the search for a new game
     socket.emit("search_game", { gameType: "tictactoe", name });
   };
 

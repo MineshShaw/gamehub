@@ -21,17 +21,6 @@ const games = [
 ];
 
 export default function Dashboard() {
-  const { isLoggedIn, logout } = useAuth();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      router.push("/auth");
-    }
-  }, [isLoggedIn]);
-
-  if (!isLoggedIn) return null;
-
   return (
     <ProtectedRoute>
       <div className="min-h-screen bg-white p-8">
