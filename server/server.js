@@ -10,6 +10,8 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 
+const port = process.env.PORT || 3000;
+
 const ticTacToe = require('../client/src/game-logic/tictactoe');
 // const chess = require('../src/game-logic/chess'); // later
 // const checkers = require('../src/game-logic/checkers'); // later
@@ -55,6 +57,6 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(3000, () => {
-  console.log('Server listening on *:3000');
+server.listen(port, () => {
+  console.log('Server listening on ' + port);
 });
