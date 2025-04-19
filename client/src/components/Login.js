@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { useEffect, useState } from 'react';
-import LoginButton from '@/components/LoginButton';
+import LoginButton from './LoginButton';
 
 /**
  * Login component that provides a form for user authentication.

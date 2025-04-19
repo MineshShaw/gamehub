@@ -2,14 +2,14 @@ import {
     Avatar,
     AvatarFallback,
     AvatarImage,
-  } from "@/components/ui/avatar"
+  } from "./ui/avatar"
   
   import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu"
+  } from "./ui/dropdown-menu"
 import { Router } from "next/router"
   
 /**

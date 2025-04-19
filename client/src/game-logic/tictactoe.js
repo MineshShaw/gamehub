@@ -6,7 +6,7 @@ const gameBoards = {};
  * @param {Socket} socket The socket of the player to matchmake
  * @param {SocketIO.Server} io The Socket.IO server
  */
-function matchmake(socket, io) {
+function matchmake(socket) {
   queue.push(socket);
   console.log(`${socket.playerName} is searching for Tic Tac Toe...`);
   console.log(queue);

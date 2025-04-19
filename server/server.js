@@ -11,7 +11,7 @@ const path = require('path');
 const http = require('http');
 const { Server } = require('socket.io');
 
-const ticTacToe = require('../src/game-logic/tictactoe');
+const ticTacToe = require('../client/src/game-logic/tictactoe');
 // const chess = require('../src/game-logic/chess'); // later
 // const checkers = require('../src/game-logic/checkers'); // later
 // const connectFour = require('../src/game-logic/connectFour'); // later
@@ -23,11 +23,6 @@ const io = new Server(server, {
     origin: 'http://localhost:3001',
     methods: ['GET', 'POST'],
   },
-});
-
-app.use(express.static(path.join(__dirname, 'public')));
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 io.on('connection', (socket) => {

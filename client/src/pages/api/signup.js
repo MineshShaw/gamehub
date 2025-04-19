@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '../../lib/supabaseClient';
 
 /**
  * Handles POST requests to /api/signup

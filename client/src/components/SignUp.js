@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import LoginButton from '@/components/LoginButton';
+import LoginButton from './LoginButton';
 
 /**
  * Signup component that provides a form for user registration.

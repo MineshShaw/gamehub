@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BugOff, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { UserAvatar } from "./UserAvatar";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 /**
  * The navbar component.
