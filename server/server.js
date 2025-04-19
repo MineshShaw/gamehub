@@ -7,7 +7,6 @@
 // 'disconnect': logs a message and removes the client from the game queue.
 // It starts the server and listens on port 3000.
 const express = require('express');
-const path = require('path');
 const http = require('http');
 const { Server } = require('socket.io');
 

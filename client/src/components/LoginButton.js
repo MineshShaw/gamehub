@@ -1,5 +1,5 @@
 'use client'
-import { useAuth } from "../context/AuthContext"
+import { useAuth } from "../context/AuthContext";
 
 /**
  * A button that signs in the user with Google, using the `useAuth()` hook.

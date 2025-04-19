@@ -1,6 +1,6 @@
 import Navbar from '../components/Navbar';
 import { AuthProvider } from '../context/AuthContext';
-import '@/styles/globals.css';
+import '../styles/globals.css';
 
 /**
  * The root App component.
