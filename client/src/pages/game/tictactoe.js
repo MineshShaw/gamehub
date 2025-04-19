@@ -29,7 +29,9 @@ export default function TicTacToeGame() {
 
   useEffect(() => {
     if (!roomId) return;
-    socket = io("http://localhost:3000");
+    socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, {
+      transports: ["websocket"],
+    });
     socket.emit("join_room", roomId);
     socket.on("board_state", (boardState) => {
       setBoard(boardState);

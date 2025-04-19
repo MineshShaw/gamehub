@@ -20,7 +20,9 @@ export default function TicTacToeLobby() {
   const router = useRouter();
 
   useEffect(() => {
-    socket = io("http://localhost:3000");
+    socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, {
+      transports: ["websocket"],
+    });
 
     socket.on("match_found", (data) => {
       console.log("Match found:", data);
