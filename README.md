@@ -18,8 +18,8 @@ Game Hub is a real-time multiplayer gaming platform built with **Next.js**, **Ta
 gamehub/
     ├─ server/
     │   ├─ server.js                              # Socket.IO server
-    │   └─ game-logic/
-    │       └─ tictactoe.js                       # Stores game logic
+    │   └─ game-logic/                            # Stores game logic
+    │       └─ tictactoe.js                       
     │
     ├─ client/
     │   ├─ src/
