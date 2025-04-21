@@ -44,7 +44,12 @@ export default function TicTacToeGame() {
         newBoard[index] = incomingMark;
         return newBoard;
       });
-      setMyTurn(true);
+      if (incomingMark === mark) {
+        setMyTurn(false);
+      }
+      if (incomingMark !== mark) {
+        setMyTurn(true);
+      }
     });
     socket.on("game_over", ({ winner, index, mark: incomingMark }) => {
         setBoard((prev) => {
@@ -70,7 +75,6 @@ export default function TicTacToeGame() {
     const newBoard = [...board];
     newBoard[index] = mark;
     setBoard(newBoard);
-    setMyTurn(false);
 
     socket.emit("make_move", {
       roomId,

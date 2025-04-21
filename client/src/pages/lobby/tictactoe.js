@@ -49,21 +49,49 @@ export default function TicTacToeLobby() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
-      <h1 className="text-3xl font-bold mb-6">Tic Tac Toe Lobby</h1>
-      <input
-        type="text"
-        placeholder="Enter your name"
-        className="px-4 py-2 rounded text-black mb-4"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <button
-        onClick={handleSearch}
-        className="bg-blue-600 px-6 py-2 rounded hover:bg-blue-700 transition"
-      >
-        {searching ? "Searching for a player..." : "Search for Game"}
-      </button>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white px-4 py-8">
+      <h1 className="text-4xl font-bold mb-6">Tic Tac Toe Lobby</h1>
+
+      {/* Input and Search Button */}
+      <div className="w-full max-w-md flex flex-col items-center">
+        <input
+          type="text"
+          placeholder="Enter your name"
+          className="px-4 py-2 rounded text-black mb-4 w-full"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <button
+          onClick={handleSearch}
+          className="bg-blue-600 px-6 py-2 rounded hover:bg-blue-700 transition w-full"
+        >
+          {searching ? "Searching for a player..." : "Search for Game"}
+        </button>
+      </div>
+
+      <div className="my-8 w-full max-w-2xl border-t border-gray-700"></div>
+
+      <div className="w-full max-w-2xl bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-2xl font-semibold mb-4">🎮 How to Play</h2>
+        {<ul className="list-disc list-inside space-y-2 text-gray-200">
+          <li>Enter your name and click &quot;Search for Game&quot;.</li>
+          <li>You&apos;ll be matched with another player in real-time.</li>
+          <li>The game starts automatically when a match is found.</li>
+          <li>Take turns placing your X or O on the grid.</li>
+          <li>The first player to get 3 in a row wins!</li>
+        </ul>}
+      </div>
+
+      <div className="w-full max-w-2xl bg-gray-800 p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-semibold mb-4">📜 Game Rules</h2>
+        <ul className="list-disc list-inside space-y-2 text-gray-200">
+          <li>Each player takes turns placing their mark (X or O).</li>
+          <li>The grid is 3x3. No overlapping moves allowed.</li>
+          <li>If all spots are filled with no winner, it’s a draw.</li>
+          <li>No time limits per move.</li>
+          <li>Be respectful — no rage quitting! 😄</li>
+        </ul>
+      </div>
     </div>
   );
 }

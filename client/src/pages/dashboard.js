@@ -31,7 +31,7 @@ const games = [
 export default function Dashboard() {
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-white p-8">
+      <div className="h-screen bg-gradient-to-r from-blue-500 to-purple-600 p-10 text-white">
         <h1 className="text-3xl font-bold text-gray-800 mb-8">
           🎮 Choose a game to play:
         </h1>
@@ -39,21 +39,14 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {games.map((game) => (
             <Link key={game.name} href={game.path}>
-              <div className="bg-gray-50 border border-gray-200 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer p-4 flex flex-col items-center">
-                <div className="relative w-full h-36 mb-4">
-                  <Image
-                    src={game.image}
-                    alt={game.name}
-                    layout="fill"
-                    objectFit="contain"
-                    className="rounded-lg"
-                  />
-                </div>
-                <h2 className="text-lg font-semibold text-gray-700">
-                  {game.name}
-                </h2>
-              </div>
-            </Link>
+            <div
+              className="w-64 h-40 md:w-72 md:h-44 border border-gray-200 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer p-4 flex items-end justify-center bg-cover bg-center text-white relative overflow-hidden"
+              style={{ backgroundImage: `url(${game.image})` }}
+            >
+              <div className="absolute inset-0 bg-black/30 rounded-2xl"></div>
+              <h2 className="text-lg font-semibold z-10">{game.name}</h2>
+            </div>
+          </Link>
           ))}
         </div>
       </div>

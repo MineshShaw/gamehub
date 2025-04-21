@@ -17,7 +17,9 @@ Game Hub is a real-time multiplayer gaming platform built with **Next.js**, **Ta
 ```
 gamehub/
     ├─ server/
-    │   └─ server.js                          # Socket.IO server
+    │   ├─ server.js                              # Socket.IO server
+    │   └─ game-logic/
+    │       └─ tictactoe.js                       # Stores game logic
     │
     ├─ client/
     │   ├─ src/
@@ -33,8 +35,6 @@ gamehub/
     │   │   ├─ context/
     │   │   │   └─ AuthContext.js                 # Provides authentication state and functions
     │   │   │
-    │   │   ├─ game-logic/
-    │   │   │   └─ tictactoe.js                   # Stores game logic
     │   │   │
     │   │   ├─ lib/
     │   │   │   └─ supabaseClient.js              # Initializes and exports a configured Supabase client

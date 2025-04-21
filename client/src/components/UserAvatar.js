@@ -10,7 +10,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
   } from "./ui/dropdown-menu"
-import { Router } from "next/router"
+import { useRouter } from "next/router"
   
 /**
  * A dropdown menu that shows the user's avatar and lets them navigate to their
@@ -32,7 +32,7 @@ import { Router } from "next/router"
         .toUpperCase()
         .slice(0, 2)
     }
-  
+    const router = useRouter()
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -41,8 +41,8 @@ import { Router } from "next/router"
             <AvatarFallback className="text-indigo-700">{getInitials(name)}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-48 mt-2" align="end">
-          <DropdownMenuItem onSelect={() => Router.push("/profile")}>
+        <DropdownMenuContent className="w-48 mt-2 bg-white rounded-2xl" align="end">
+          <DropdownMenuItem onSelect={() => router.push("/profile")}>
             Profile
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={onLogout}>
