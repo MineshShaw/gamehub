@@ -119,11 +119,11 @@ Visit: `http://localhost:3001`
 
 ## 🌟 Planned Features
 
-- Add more games (Chess, Checkers, Connect Four)
+- Add more games (Chess, Checkers, Connect Four, etc...)
 - Improve UI with animations and game feedback
 - Enhance game logic with better validation and edge case handling
 - Add matchmaking, rooms, and user tracking
-- Host the frontend and add persistent user sessions
+- Add a user profile page.
 
 
 ## ⚠️ Notes
